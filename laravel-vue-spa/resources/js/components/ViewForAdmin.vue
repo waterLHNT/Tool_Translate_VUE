@@ -13,6 +13,16 @@
               {{ tab.title }}
             </router-link>
           </li>
+          <li v-for="tab in tabs2" :key="tab.name_route" class="nav-item">
+            <router-link
+              :to="{ name: tab.name_route }"
+              class="nav-link"
+              active-class="active"
+            >
+              <fa :icon="tab.icon" fixed-width />
+              {{ tab.title }}
+            </router-link>
+          </li>
         </ul>
       </card>
     </div>
@@ -29,6 +39,9 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
+    user () {
+    return this.$store.getters['auth/user']
+  },
     tabs() {
       return [
         {
@@ -43,12 +56,28 @@ export default {
         },
       ];
     },
-
+    tabs2() {
+      return [
+        {
+          icon: "home",
+          title: this.$t("hahaha"),
+          name_route: "home",
+        },
+        {
+          icon: "home",
+          title: this.$t("hihihi"),
+          name_route: "home",
+        },
+      ];
+    },
   },
 
   data: () => ({
     appName: window.config.appName,
   }),
+  mounted: {
+    // console.log(this.$store)
+  }
 };
 </script>
 
