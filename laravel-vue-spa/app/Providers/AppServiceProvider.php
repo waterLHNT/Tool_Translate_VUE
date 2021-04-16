@@ -30,5 +30,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local', 'testing') && class_exists(DuskServiceProvider::class)) {
             $this->app->register(DuskServiceProvider::class);
         }
+        //Repositories
+        $this->app->singleton(
+            \App\Repositories\Users\usersRepositoryInterface::class,
+            \App\Repositories\Users\usersRepository::class
+        );
     }
 }
