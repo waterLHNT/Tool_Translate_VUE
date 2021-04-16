@@ -38,7 +38,7 @@
           <div class="form-group row">
             <div class="col-md-7 offset-md-3 d-flex">
               <!-- Submit Button -->
-              <v-button :loading="form.busy"> 
+              <v-button :loading="form.busy">
                 {{ $t('login') }}
               </v-button>
 
@@ -89,14 +89,17 @@ export default {
 
       // // Fetch the user.
       // await this.$store.dispatch('auth/fetchUser')
-
       // Redirect home.
       this.redirect()
     },
 
+    user(){
+      return this.$store.getters['auth/user']
+      console.log(this.$store.getters['auth/user'])
+    },
+
     redirect () {
       const intendedUrl = Cookies.get('intended_url')
-
       if (intendedUrl) {
         Cookies.remove('intended_url')
         this.$router.push({ path: intendedUrl })

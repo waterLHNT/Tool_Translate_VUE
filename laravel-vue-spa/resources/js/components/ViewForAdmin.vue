@@ -1,35 +1,19 @@
 <template>
-  <div class="row">
-    <div class="col-md-3">
-      <card title="Dashboard" class="settings-card">
-        <ul class="nav flex-column nav-pills">
-          <li v-for="tab in tabs" :key="tab.name_route" class="nav-item">
-            <router-link
-              :to="{ name: tab.name_route }"
-              class="nav-link"
-              active-class="active"
-            >
-              <fa :icon="tab.icon" fixed-width />
-              {{ tab.title }}
-            </router-link>
-          </li>
-          <li v-for="tab in tabs2" :key="tab.name_route" class="nav-item">
-            <router-link
-              :to="{ name: tab.name_route }"
-              class="nav-link"
-              active-class="active"
-            >
-              <fa :icon="tab.icon" fixed-width />
-              {{ tab.title }}
-            </router-link>
-          </li>
-        </ul>
-      </card>
-    </div>
-    <div class="col-md-9">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
+  <div>
+    <div class="text-center">
+      <div class="title mb-4">
+        Welcome to admin
+      </div>
+      <div>
+         <router-link :to="{ name: 'users.list' }" class="btn btn-success">
+                <fa icon="user" fixed-width />
+                Manage Users
+          </router-link>
+           <router-link :to="{ name: 'translations.list' }" class="btn btn-success">
+                <fa icon="newspaper" fixed-width />
+                Manage Translations
+          </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -38,46 +22,30 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  computed: {
-    user () {
-    return this.$store.getters['auth/user']
-  },
-    tabs() {
-      return [
-        {
-          icon: "home",
-          title: this.$t("Home"),
-          name_route: "home",
-        },
-        {
-          icon: "user",
-          title: this.$t("Users"),
-          name_route: "users.index",
-        },
-      ];
-    },
-    tabs2() {
-      return [
-        {
-          icon: "home",
-          title: this.$t("hahaha"),
-          name_route: "home",
-        },
-        {
-          icon: "home",
-          title: this.$t("hihihi"),
-          name_route: "home",
-        },
-      ];
-    },
+  layout: 'basic',
+
+  metaInfo () {
+    return { title: this.$t('home') }
   },
 
   data: () => ({
-    appName: window.config.appName,
+    title: window.config.appName
   }),
-  mounted: {
-    // console.log(this.$store)
-  }
-};
+
+  computed: mapGetters({
+    authenticated: 'auth/check'
+  })
+}
 </script>
 
+<style scoped>
+.top-right {
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+
+.title {
+  font-size: 85px;
+}
+</style>
