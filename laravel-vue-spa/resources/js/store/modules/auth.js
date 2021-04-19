@@ -75,5 +75,5 @@ export const actions = {
     const { data } = await axios.post(`/api/oauth/${provider}`)
 
     return data.url
-  }
+  },
 }

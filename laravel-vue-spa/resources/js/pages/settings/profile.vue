@@ -63,6 +63,9 @@ export default {
   },
 
   methods: {
+    user(){
+      return this.$store.getters['auth/user']
+    },
     async update () {
       const { data } = await this.form.patch('/api/settings/profile')
 

@@ -21,10 +21,10 @@
               <fa icon="user" />
               Delete
             </button>
-            <router-link :to="{ name: 'users.update' }" class="btn btn-info">
+            <button @click="updateUser(user.id)" class="btn btn-info">
               <fa icon="user" />
               Update
-            </router-link>
+            </button>
           </td>
         </tr>
       </table>
@@ -43,6 +43,10 @@ export default {
       message: null,
     };
   },
+   //Call method getUser to get data list users
+  created() {
+    this.getUser();
+  },
   methods: {
     getUser() {
       axios.get("/api/users/list").then((response) => {
@@ -51,16 +55,14 @@ export default {
     },
     deleteUser: function (id,index) {
        axios.get("/api/users/delete/"+id).then((response) => {
-       this.message = response.data.message + " " + id
+       this.message = response.data.message + " " + id;
       });
       this.users.splice(index, 1);
     },
+    updateUser: function(id){
+      this.$router.push({ name: 'users.update', params:{id: id} });
+    }
   },
-  //Call method getUser to get data list users
-  created() {
-    this.getUser();
-  },
-
   metaInfo() {
     return { title: this.$t("Users") };
   },

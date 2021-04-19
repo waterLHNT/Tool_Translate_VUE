@@ -16,7 +16,6 @@ class UserResource extends ResourceCollection
     {
         $arr = [];
         $collection = $this->collection->all();
-
         foreach ($collection as $user) {
             $arr[] = [
                 'id'         => $user->id,
@@ -27,6 +26,7 @@ class UserResource extends ResourceCollection
                 'updated_at' => $user->updated_at,
             ];
         }
+        
         return $arr;
     }
     public function getRole($role)

@@ -1,8 +1,15 @@
 <template>
   <card :title="$t('your_info')">
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)">
+    <form @submit.prevent="update"  @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('info_updated')" />
-
+       <!-- Name -->
+      <div class="form-group row">
+        <label class="col-md-3 col-form-label text-md-right">{{ $t('ID') }}</label>
+        <div class="col-md-7">
+          <input readonly v-model="form.id" :class="{ 'is-invalid': form.errors.has('id') }" class="form-control" type="text" name="id">
+          <has-error :form="form" field="fullname" />
+        </div>
+      </div>
       <!-- Name -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
@@ -35,39 +42,43 @@
 
 <script>
 import Form from 'vform'
+import axios from "axios"
 import { mapGetters } from 'vuex'
-
 export default {
+  
   scrollToTop: false,
-
+  
   metaInfo () {
-    return { title: this.$t('settings') }
+    return { title: this.$t('Update User') }
   },
-
   data: () => ({
     form: new Form({
-      fullname: '',
+      id:'',
+      fullname:'',
       email: ''
-    })
+    }),
+    user:{},
   }),
-
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
-
-  created () {
+   created () {
     // Fill the form with user data.
-    this.form.keys().forEach(key => {
-      this.form[key] = this.user[key]
-    })
+      this.getUser();
   },
-
   methods: {
+      getUser(){
+        var id = this.$route.params.id;
+         axios.get("/api/users/update/" + id).then((response) => {
+        this.user = response.data.data;
+        this.form.id = this.user.id;
+        this.form.fullname = this.user.fullname;
+        this.form.email = this.user.email;
+      });
+    },
     async update () {
-      const { data } = await this.form.patch('/api/settings/profile')
-
-      this.$store.dispatch('auth/updateUser', { user: data })
+      var id = this.$route.params.id;
+      const { data } = await this.form.patch('/api/update/'+id)
+      this.getUser();
     }
-  }
+  },
+  
 }
 </script>

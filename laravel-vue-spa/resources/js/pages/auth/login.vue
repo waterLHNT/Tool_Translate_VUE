@@ -95,7 +95,6 @@ export default {
 
     user(){
       return this.$store.getters['auth/user']
-      console.log(this.$store.getters['auth/user'])
     },
 
     redirect () {

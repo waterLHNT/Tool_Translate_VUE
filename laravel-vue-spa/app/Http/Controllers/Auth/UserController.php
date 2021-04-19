@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\findUserResource;
 use App\Repositories\Users\usersRepositoryInterface;
 class UserController extends Controller
 {
@@ -32,5 +33,8 @@ class UserController extends Controller
     public function delete($id){
         $this->usersRepo->delete($id);
         return response()->json(["message" => "Delete successfully"]);
+    }
+    public function edit($id){
+        return new findUserResource($this->usersRepo->find($id));
     }
 }

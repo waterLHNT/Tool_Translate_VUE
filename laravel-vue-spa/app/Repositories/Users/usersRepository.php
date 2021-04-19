@@ -20,4 +20,7 @@ class usersRepository extends BaseRepository implements usersRepositoryInterface
     public function delete($id){
         return $this->model->find($id)->delete();
     }
+    public function find($id){
+        return $this->model->find($id);
+    }
 }

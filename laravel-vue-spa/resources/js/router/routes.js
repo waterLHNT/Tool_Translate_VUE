@@ -30,7 +30,7 @@ export default [
             { path: '', redirect: { name: 'users.list' } },
             { path: 'list', name: 'users.list', component: page('users/list.vue') },
             { path: 'create', name: 'users.create', component: page('users/create.vue') },
-            { path: 'update', name: 'users.update', component: page('users/update.vue') },
+            { path: 'update/:id', name: 'users.update', component: page('users/update.vue') },
         ]
     },
     // //Translations
