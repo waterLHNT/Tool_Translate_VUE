@@ -29,10 +29,22 @@ class usersRepository extends BaseRepository implements usersRepositoryInterface
             'fullname' => $request->fullname??$user->fullname,
             'email' => $request->email??$user->email,
             'password' => $request->password??$user->password,
-            'role_id' => $request->role??$user->role,
+            'role' => $request->role,
             'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
         ];
         $update = $user->update($data);
         return $update;
+    }
+    public function createData($request){
+        $data = [
+            'fullname' => $request->fullname,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'created_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ];
+        $create = $this->model->create($data);
+        return $create;
     }
 }

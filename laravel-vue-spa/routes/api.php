@@ -21,15 +21,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::patch('users/update/{id}', [UserController::class, 'update']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('logout', [LoginController::class, 'logout']);
 
     Route::get('user', [UserController::class, 'current']);
     Route::get('users/list', [UserController::class, 'index']);
+    Route::patch('users/create', [UserController::class, 'store']);
     Route::get('users/delete/{id}', [UserController::class, 'delete']);
     Route::get('users/update/{id}', [UserController::class, 'edit']);
+    Route::patch('users/update/{id}', [UserController::class, 'update']);
 
 
     Route::patch('settings/profile', [ProfileController::class, 'update']);

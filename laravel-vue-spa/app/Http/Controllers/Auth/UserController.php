@@ -30,6 +30,9 @@ class UserController extends Controller
     public function index(){
         return new UserResource($this->usersRepo->getAll());
     }
+    public function store(Request $request){
+      $this->usersRepo->createData($request);
+    }
     public function delete($id){
         $this->usersRepo->delete($id);
         return response()->json(["message" => "Delete successfully"]);
