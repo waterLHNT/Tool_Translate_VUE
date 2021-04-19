@@ -37,4 +37,7 @@ class UserController extends Controller
     public function edit($id){
         return new findUserResource($this->usersRepo->find($id));
     }
+    public function update(Request $request,$id){
+        return $this->usersRepo->updateData($id,$request);
+    }
 }

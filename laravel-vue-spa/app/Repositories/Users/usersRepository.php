@@ -23,4 +23,16 @@ class usersRepository extends BaseRepository implements usersRepositoryInterface
     public function find($id){
         return $this->model->find($id);
     }
+    public function updateData($id, $request){
+        $user = $this->find($id);
+        $data = [
+            'fullname' => $request->fullname??$user->fullname,
+            'email' => $request->email??$user->email,
+            'password' => $request->password??$user->password,
+            'role_id' => $request->role??$user->role,
+            'updated_at' => Carbon::now('Asia/Ho_Chi_Minh'),
+        ];
+        $update = $user->update($data);
+        return $update;
+    }
 }

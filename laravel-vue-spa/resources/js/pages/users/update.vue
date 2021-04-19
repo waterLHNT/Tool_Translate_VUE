@@ -1,7 +1,7 @@
 <template>
   <card :title="$t('your_info')">
     <form @submit.prevent="update"  @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('info_updated')" />
+      <alert-success :form="form" :message="$t('Updated')" />
        <!-- Name -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{ $t('ID') }}</label>
@@ -43,7 +43,6 @@
 <script>
 import Form from 'vform'
 import axios from "axios"
-import { mapGetters } from 'vuex'
 export default {
   
   scrollToTop: false,
@@ -55,7 +54,8 @@ export default {
     form: new Form({
       id:'',
       fullname:'',
-      email: ''
+      email: '',
+      role:'',
     }),
     user:{},
   }),
@@ -75,7 +75,7 @@ export default {
     },
     async update () {
       var id = this.$route.params.id;
-      const { data } = await this.form.patch('/api/update/'+id)
+      const { data } = await this.form.patch('/api/users/update/'+id)
       this.getUser();
     }
   },
