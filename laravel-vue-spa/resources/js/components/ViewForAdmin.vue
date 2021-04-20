@@ -3,7 +3,7 @@
     <div class="text-center">
       <div class="title mb-4">Welcome to admin</div>
       <div>
-        <router-link :to="{ name: 'users.list' }" class="btn btn-success">
+        <router-link :to="{ name: 'users.list' }" v-if="user.role == 1 || user.role == 2" class="btn btn-success">
           <fa icon="user" fixed-width />
           Manage Users
         </router-link>

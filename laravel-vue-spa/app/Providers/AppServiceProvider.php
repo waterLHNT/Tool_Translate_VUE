@@ -35,5 +35,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Users\usersRepositoryInterface::class,
             \App\Repositories\Users\usersRepository::class
         );
+        //Translations
+        $this->app->singleton(
+            \App\Repositories\Translations\translationsRepositoryInterface::class,
+            \App\Repositories\Translations\translationsRepository::class
+        );
     }
 }

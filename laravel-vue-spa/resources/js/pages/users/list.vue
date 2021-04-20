@@ -4,10 +4,10 @@
     <div id="data">
       <table>
         <tr>
-          <th>id</th>
-          <th>fullname</th>
-          <th>email</th>
-          <th>role</th>
+          <th>Id</th>
+          <th>Fullname</th>
+          <th>Email</th>
+          <th>Role</th>
           <th>Actions</th>
         </tr>
 

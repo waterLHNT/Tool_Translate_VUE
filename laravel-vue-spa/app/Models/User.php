@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Notifications\ResetPassword;
 use App\Notifications\VerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
@@ -34,6 +35,14 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
      *
      * @var array
      */
+    //Update relationships
+    public function translations(){
+        return $this->hasMany(Translations::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comments::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

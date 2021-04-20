@@ -21,22 +21,30 @@ export default [
             { path: 'password', name: 'settings.password', component: page('settings/password.vue') }
         ]
     },
-    //Admin
+    //Users
     {
         path: '/users',
         component: page('users/index.vue'),
         children: [
-            //Users
             { path: '', redirect: { name: 'users.list' } },
             { path: 'list', name: 'users.list', component: page('users/list.vue') },
             { path: 'create', name: 'users.create', component: page('users/create.vue') },
             { path: 'update/:id', name: 'users.update', component: page('users/update.vue') },
         ]
     },
-    // //Translations
-    { path: 'translations/index', name: 'translations.index', component: page('translations/index.vue') },
-    { path: 'translations/create', name: 'translations.create', component: page('translations/create.vue') },
-    { path: 'translations/update', name: 'translations.update', component: page('translations/update.vue') },
+    //Translations
+    {
+        path: '/translations',
+        component: page('translations/index.vue'),
+        children: [
+            { path: '', redirect: { name: 'translations.list' } },
+            { path: 'list', name: 'translations.list', component: page('translations/list.vue') },
+            { path: 'create', name: 'translations.create', component: page('translations/create.vue') },
+            { path: 'update/:id', name: 'translations.update', component: page('translations/update.vue') },
+        ]
+    },
+    //Page Trans
+    { path: '/window/trans/:id', name: 'window.trans', component: page('translation.vue') },
 
     { path: '*', component: page('errors/404.vue') }
 ]
